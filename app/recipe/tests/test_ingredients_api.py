@@ -56,7 +56,10 @@ class PrivateIngredientsApiTests(TestCase):
             'password2'
         )
         Ingredient.objects.create(user=user2, name='Do not retrieve')
-        ingredient = Ingredient.objects.create(user=self.user, name='Retrieva Ingredient')
+        ingredient = Ingredient.objects.create(
+            user=self.user,
+            name='Retrieve Ingredient'
+        )
 
         res = self.client.get(INGREDIENTS_URL)
 
@@ -75,7 +78,7 @@ class PrivateIngredientsApiTests(TestCase):
         ).exists()
 
         self.assertTrue(exists)
-    
+
     def test_create_ingredient_invalid(self):
         """Test create a new invalid ingredient"""
         payload = {'name': ''}
